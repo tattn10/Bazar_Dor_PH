@@ -1,6 +1,7 @@
 import HeroSec from "@/Components/hero-sec";
 import AllProducts from "./AllProducts/page";
 import PriceUp from "@/Components/priceUp";
+import PriceDown from "@/Components/priceDown";
 
 
 export default async function Home() {
@@ -15,7 +16,8 @@ export default async function Home() {
   
   <HeroSec />
   <PriceUp data={data} />
-  <AllProducts />
+  <PriceDown data={data} />
+  <AllProducts data={data} />
     </>
   );
 }
