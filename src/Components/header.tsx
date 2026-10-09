@@ -3,7 +3,6 @@ import Link from "next/link";
 import logo from "@/app/assets/logo-icon.png"
 import Marquee from "./marquee";
 
-
 type Category = {
     id: string | number;
     icon: string;

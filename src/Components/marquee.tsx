@@ -1,12 +1,10 @@
 import Marqueee from "react-fast-marquee";
 import { FaArrowCircleUp,FaArrowCircleDown } from "react-icons/fa";
 
-
 const Marquee = async() => {
     
   const products= await fetch("https://api.api-store.workers.dev/api/bazardor/products");
   const data = await products.json();
-
 
     return (
         <>
@@ -19,7 +17,7 @@ const Marquee = async() => {
             <p>{product.nameBn}</p>
             <p>{
                 product.today ?
-            Number(product.today).toLocaleString("bn-BD") : "no "
+            Number(product.today).toLocaleString("bn-BD") : ""
         } টাকা/কেজি</p>
             <p>{
                 product.change.dir === "up" ? <FaArrowCircleUp className="text-red-500" /> : <FaArrowCircleDown className="text-green-500" />
