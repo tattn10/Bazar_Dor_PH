@@ -5,7 +5,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const isUp = product.change.dir === "up";
 
   return (
-    <Link href={`/product/${product.id}`}>
+    <Link href={`/ProductDetails/${product.id}`}>
       <div className="w-full max-w-md rounded-[24px] border border-[#dfe8e0] bg-[#fbfdfb] p-5 shadow-sm hover:border-green-500 hover:shadow-md">
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[18px] bg-[#f0f5ef] text-3xl">

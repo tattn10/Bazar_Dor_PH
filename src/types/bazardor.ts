@@ -5,6 +5,7 @@ export interface ProductChange {
 
 export interface Product {
   id: string | number;
+  slug: string;
   image: string;
   nameBn: string;
   unit: string;
