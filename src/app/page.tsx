@@ -1,5 +1,5 @@
 import HeroSec from "@/Components/hero-sec";
-import AllProducts from "./AllProducts/page";
+import AllProductsList from "@/Components/AllProductsList";
 import PriceUp from "@/Components/priceUp";
 import PriceDown from "@/Components/priceDown";
 import type { Product } from "@/types/bazardor";
@@ -23,7 +23,7 @@ export default async function Home() {
   <HeroSec />
   <PriceUp data={data} />
   <PriceDown data={data} />
-  <AllProducts data={data} />
+  <AllProductsList data={data} />
     </>
   );
 }

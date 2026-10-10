@@ -30,7 +30,8 @@ const ProductDetail = async ({params}:  CategoryRouteProps ) => {
      changeDir = " সমান আছে ";
     }
 
-
+const formatPrice = (price: number) =>
+  `${price.toLocaleString("bn-BD")} টাকা`;
 
     let prices=[data.today,data.yesterday,data.lastWeek,data.lastMonth];
     let maxPrice=Math.max(...prices);
@@ -95,6 +96,70 @@ const ProductDetail = async ({params}:  CategoryRouteProps ) => {
 
 <div>
 <p className="font-semibold text-xl py-4">বাজারভিত্তিক আজকের দাম</p>
+
+
+ <section className="w-full overflow-hidden rounded-xl border border-[#dfe8e0] bg-[#f8fbf8]">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[600px] border-collapse text-left text-sm">
+          <thead>
+            <tr className="border-b border-[#e5ebe5] text-[#788078]">
+              <th className="px-3 py-3 font-semibold">বাজার</th>
+              <th className="px-3 py-3 font-semibold">বিভাগ</th>
+              <th className="px-3 py-3 text-right font-semibold">সর্বনিম্ন</th>
+              <th className="px-3 py-3 text-right font-semibold">সর্বোচ্চ</th>
+              <th className="px-3 py-3 text-right font-semibold">গড়</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {data.markets.map((item, index) => {
+              const average = (item.min + item.max) / 2;
+
+              return (
+                <tr
+                  key={`${item.market}-${item.division}`}
+                  className={`border-b border-[#d7dfd7] last:border-b-0 ${
+                    index % 2 === 0 ? "bg-[#f0f5f0]" : "bg-[#fbfdfb]"
+                  } transition-colors hover:bg-[#e6f2e8]`}
+                >
+                  <td className="whitespace-nowrap px-3 py-3 font-medium text-[#354239]">
+                    {item.market}
+                  </td>
+
+                  <td className="whitespace-nowrap px-3 py-3 text-[#68736a]">
+                    {item.division}
+                  </td>
+
+                  <td className="whitespace-nowrap px-3 py-3 text-right text-[#465248]">
+                    {formatPrice(item.min)}
+                  </td>
+
+                  <td className="whitespace-nowrap px-3 py-3 text-right text-[#465248]">
+                    {formatPrice(item.max)}
+                  </td>
+
+                  <td className="whitespace-nowrap px-3 py-3 text-right font-semibold text-[#26352c]">
+                    {formatPrice(average)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
   
 </div>

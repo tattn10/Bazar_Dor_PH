@@ -1,27 +1,24 @@
-import ProductCard from "@/Components/ProductDetails/page";
-import type { ProductListProps } from "@/types/bazardor";
+import AllProductsList from "@/Components/AllProductsList";
+import type { Product } from "@/types/bazardor";
 
+const AllProducts = async () => {
+  const response = await fetch(
+    "https://api.api-store.workers.dev/api/bazardor/products",
+    { next: { revalidate: 300 } },
+  );
 
+  if (!response.ok) {
+    throw new Error(`Request failed: ${response.status}`);
+  }
 
-const AllProducts =  ({ data }: ProductListProps) => {
- 
+  const result: unknown = await response.json();
+  if (!Array.isArray(result)) {
+    throw new Error("Products API response must be an array.");
+  }
 
-    return (
-        <>
-        <div className="max-w-7xl mx-auto my-8">
+  const data = result as Product[];
 
-            <p className="text-lg font-bold">সব পণ্য</p>
-            <p className="text-sm text-gray-500">মোট {data.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে</p>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 sm:grid-cols-1 justify-center items-center">
-                {
-                    data.map(product => <div key={product.id} className="my-4">
-                        <ProductCard product={product} />
-                    </div>)
-                }
-            </div>
-        </div>
-        </>
-    )
-}
+  return <AllProductsList data={data} />;
+};
 
 export default AllProducts;
