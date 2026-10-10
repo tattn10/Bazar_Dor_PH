@@ -1,10 +1,16 @@
 import Marqueee from "react-fast-marquee";
 import { FaArrowCircleUp,FaArrowCircleDown } from "react-icons/fa";
+import type { Product } from "@/types/bazardor";
 
 const Marquee = async() => {
     
-  const products= await fetch("https://api.api-store.workers.dev/api/bazardor/products");
-  const data = await products.json();
+  const res= await fetch("https://api.api-store.workers.dev/api/bazardor/products",{
+  next: { revalidate: 300 },
+});
+  if (!res.ok) {
+  throw new Error(`Request failed: ${res.status}`);
+}
+  const data: Product[] = await res.json();
 
     return (
         <>

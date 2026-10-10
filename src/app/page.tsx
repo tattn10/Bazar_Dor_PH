@@ -2,13 +2,19 @@ import HeroSec from "@/Components/hero-sec";
 import AllProducts from "./AllProducts/page";
 import PriceUp from "@/Components/priceUp";
 import PriceDown from "@/Components/priceDown";
+import type { Product } from "@/types/bazardor";
 
 
 export default async function Home() {
 
-  const products= await fetch("https://api.api-store.workers.dev/api/bazardor/products");
-  const data = await products.json();
-  console.log(data);
+  const res= await fetch("https://api.api-store.workers.dev/api/bazardor/products",{
+  next: { revalidate: 300 },
+});
+  if (!res.ok) {
+  throw new Error(`Request failed: ${res.status}`);
+}
+  const data: Product[] = await res.json();
+
 
 
   return (

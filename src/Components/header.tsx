@@ -2,17 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "@/app/assets/logo-icon.png"
 import Marquee from "./marquee";
-
-type Category = {
-    id: string | number;
-    icon: string;
-    nameBn: string;
-};
+import { connection } from "next/server";
+import Categories from "@/app/Categories/page";
+import type { Category } from "@/types/bazardor";
 
 const Header = async () => {
+  await connection();
+const res = await fetch("https://api.api-store.workers.dev/api/bazardor/categories",{
+  next: { revalidate: 300 },
+});
 
-const CategoryList = await fetch("https://api.api-store.workers.dev/api/bazardor/categories");
-const data: Category[] = await CategoryList.json();
+if (!res.ok) {
+  throw new Error(`Request failed: ${res.status}`);
+}
+const data: Category[] = await res.json();
 
     const today = new Date();
 
@@ -67,12 +70,7 @@ console.log(bengaliDate);
 <div className="bg-base-100 flex gap-6 my-2">
     {
         data.map((category) => (
-            <Link href="/"  key={category.id}>
-            <div className="text-sm hover:text-green-400">
-                <span >{category.icon}</span>
-                <span>{category.nameBn}</span>
-            </div>
-            </Link>
+          <Categories key={category.id} category={category} />
         ))
     }
 </div>
