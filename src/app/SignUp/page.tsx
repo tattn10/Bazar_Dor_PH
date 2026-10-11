@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -21,12 +22,12 @@ const {data,error} = await authClient.signUp.email({
 
 
 if(data){
-  
+    toast.success("সফলভাবে সাইন আপ করা হয়েছে!");
     redirect("/");
 }
 
     if(error){
-        alert("Error signing up: " + error.message);
+        toast.error( error.message);
     }
 
 }

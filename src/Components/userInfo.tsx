@@ -20,9 +20,11 @@ const handleSignOut = async ()=>{
 
         {user ? <div className="navbar-end flex gap-2 ">
             <div className="avatar flex gap-2 items-center">
+                <Link href="/Profiule">
   <div className="w-10 rounded-full">
     <img alt="Tailwind-CSS-Avatar-component" src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
   </div>
+  </Link>
   <p className="font-bold">{user.name.toUpperCase()}</p>
 </div>
 

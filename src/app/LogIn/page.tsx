@@ -1,10 +1,13 @@
 
 "use client";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React, { useState } from "react";
+
+
+
 
 const onSubmit=  async (e:React.SubmitEvent<HTMLElement>)=>{
     e.preventDefault();
@@ -18,12 +21,13 @@ const {data,error} = await authClient.signIn.email({
 
 console.log(data);
 if(data){
-    alert("sign in completed");
+     toast.success(`সফলভাবে সাইন ইন করা হয়েছে `)
     redirect("/");
+   
 }
 
     if(error){
-        alert("Error signing in: " + error.message);
+        toast.error(error.message);
     }
 
 
