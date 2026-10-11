@@ -1,23 +1,33 @@
-# Bazar_Dor_PH
+##বাজার দর | BazarDor
 
-## Getting Started
+Making everyday market prices accessible to everyone in Bangladesh.
 
-Install dependencies and start the development server:
+বাজার দর (BazarDor) is a web-based platform that helps consumers in Bangladesh explore the prices of everyday essentials. It provides an intuitive interface for browsing products, comparing prices across markets, and understanding price changes over time.
 
-```bash
-npm install
-npm run dev
-```
+🛠️ Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) to view the app.
+Next.js — React framework for building the web application.
 
-This is a [Next.js](https://nextjs.org) project using the App Router and `next/font` for Geist.
+React — Component-based user interface development.
 
-## Learn More
+TypeScript — Type safety and maintainable code.
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Learn Next.js](https://nextjs.org/learn)
+Tailwind CSS — Responsive styling and modern UI design.
 
-## Deploy
+MongoDB Atlas — Cloud database for application data.
 
-The app can be deployed on [Vercel](https://vercel.com), or another platform that supports Next.js.
+REST API — Fetching product and market price information.
+
+Vercel — Application deployment and hosting.
+
+✨ Key Features
+
+Daily Product Prices — Explore the latest prices of essential everyday products.
+
+Market Price Comparison — Compare minimum and maximum prices across different markets and divisions.
+
+Price Trends — Track price changes against yesterday, last week, and last month.
+
+Product Search & Categories — Find products easily and browse them by category.
+
+User Account Interface — Access login, signup, and profile pages for a personalized experience.
