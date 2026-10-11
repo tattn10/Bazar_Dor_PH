@@ -33,8 +33,17 @@ if(data){
 
 }
 
+
+
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleGoogleSignIn= async()=>{
+ const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  console.log(data);
+}
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#f0f5f0] px-4 py-8">
@@ -124,9 +133,7 @@ export default function LoginPage() {
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
-            onClick={() => {
-              // Start Google OAuth here.
-            }}
+            onClick={handleGoogleSignIn}
             className="flex min-w-0 items-center justify-center gap-1.5 rounded-lg border border-[#dfe8e0] px-2 py-2.5 text-xs font-semibold text-[#39453c] transition hover:bg-[#f0f5f0] sm:text-sm"
           >
             <GoogleIcon />
