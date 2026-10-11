@@ -44,6 +44,12 @@ export default function LoginPage() {
   });
   console.log(data);
 }
+ const handleGithubSignIn= async()=>{
+    const data = await authClient.signIn.social({
+        provider: "github"
+    })
+    console.log(data)
+}
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#f0f5f0] px-4 py-8">
@@ -142,9 +148,7 @@ export default function LoginPage() {
 
           <button
             type="button"
-            onClick={() => {
-              // Start GitHub OAuth here.
-            }}
+            onClick={handleGithubSignIn}
             className="flex min-w-0 items-center justify-center gap-1.5 rounded-lg border border-[#dfe8e0] px-2 py-2.5 text-xs font-semibold text-[#39453c] transition hover:bg-[#f0f5f0] sm:text-sm"
           >
             <GitHubIcon />

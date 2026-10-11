@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -34,7 +35,20 @@ if(data){
 
 const SignUp = () => {
       const [showPassword, setShowPassword] = useState(false);
+ const handleGoogleSignIn= async()=>{
+ const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  console.log(data);
+}
+ const handleGithubSignIn= async()=>{
+    const data = await authClient.signIn.social({
+        provider: "github"
+    })
+    console.log(data)
+}
 
+      
     return (
         <>
         
@@ -155,9 +169,7 @@ const SignUp = () => {
           <button
             type="button"
             className="flex min-w-0 items-center justify-center gap-1.5 rounded-lg border border-[#dfe8e0] px-2 py-2.5 text-xs font-semibold text-[#39453c] transition hover:bg-[#f0f5f0] sm:text-sm"
-            onClick={() => {
-              // Start Google OAuth here.
-            }}
+            onClick={handleGoogleSignIn}
           >
             <GoogleIcon />
             <span>Google দিয়ে চালিয়ে যান</span>
@@ -166,9 +178,7 @@ const SignUp = () => {
           <button
             type="button"
             className="flex min-w-0 items-center justify-center gap-1.5 rounded-lg border border-[#dfe8e0] px-2 py-2.5 text-xs font-semibold text-[#39453c] transition hover:bg-[#f0f5f0] sm:text-sm"
-            onClick={() => {
-              // Start GitHub OAuth here.
-            }}
+            onClick={handleGithubSignIn}
           >
             <GitHubIcon />
             <span>GitHub দিয়ে চালিয়ে যান</span>
