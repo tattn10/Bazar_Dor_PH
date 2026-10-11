@@ -1,8 +1,33 @@
 
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { useState } from "react";
+import { redirect } from "next/navigation";
+import React, { useState } from "react";
+
+const onSubmit=  async (e:React.SubmitEvent<HTMLElement>)=>{
+    e.preventDefault();
+    const formData= new FormData(e.target)
+const user= Object.fromEntries(formData.entries()) as {  email: string, password: string}
+console.log(user);
+const {data,error} = await authClient.signIn.email({
+    ...user,
+    callbackURL: "/" 
+})
+
+console.log(data);
+if(data){
+    alert("sign in completed");
+    redirect("/");
+}
+
+    if(error){
+        alert("Error signing in: " + error.message);
+    }
+
+
+}
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,10 +46,7 @@ export default function LoginPage() {
       <div className="w-full max-w-[394px] rounded-2xl border border-[#e0e9e1] bg-[#fbfdfb] p-5 shadow-sm sm:p-6">
         <form
           className="space-y-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            // Connect your login API here.
-          }}
+          onSubmit={onSubmit}
         >
           <div>
             <label
