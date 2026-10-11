@@ -1,11 +1,39 @@
 
 "use client";
-
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useState } from "react";
+
+
+
+
+const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+e.preventDefault();
+const formData= new FormData(e.target)
+const user= Object.fromEntries(formData.entries()) as{ name: string; email: string; password: string; confirmPassword: string }
+
+
+const {data,error} = await authClient.signUp.email({
+    ...user,
+    callbackURL: "/" 
+})
+
+
+if(data){
+  
+    redirect("/");
+}
+
+    if(error){
+        alert("Error signing up: " + error.message);
+    }
+
+}
 
 const SignUp = () => {
       const [showPassword, setShowPassword] = useState(false);
+
     return (
         <>
         
@@ -22,10 +50,7 @@ const SignUp = () => {
       <div className="w-full max-w-[394px] rounded-2xl border border-[#e0e9e1] bg-[#fbfdfb] p-5 shadow-sm sm:p-6">
         <form
           className="space-y-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            // Connect your signup API here.
-          }}
+          onSubmit={onSubmit}
         >
           <div>
             <label

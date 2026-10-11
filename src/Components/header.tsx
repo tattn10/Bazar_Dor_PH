@@ -5,6 +5,7 @@ import Marquee from "./marquee";
 import { connection } from "next/server";
 import Categories from "@/app/Categories/page";
 import type { Category } from "@/types/bazardor";
+import UserInfo from "./userInfo";
 
 const Header = async () => {
   await connection();
@@ -59,14 +60,7 @@ console.log(bengaliDate);
     </div>
   </div>
   
-  <div className="navbar-end flex gap-2">
-    <Link href="/LogIn">
-      <button className="btn">সাইন ইন</button>
-    </Link>
-    <Link href="/SignUp">
-      <button className="btn bg-green-600 shadow-lg text-white">সাইন আপ</button>
-    </Link>
-  </div>
+<UserInfo />
 
 </div>
 
