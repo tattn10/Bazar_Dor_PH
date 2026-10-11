@@ -1,7 +1,6 @@
-import type { CategoryDetails, CategoryRouteProps,Category } from "@/types/bazardor";
-import Image from "next/image";
-import CategoryHeader from "@/Components/categoryHeader";
+import type { CategoryDetails, CategoryRouteProps, Category } from "@/types/bazardor";
 import ProductCard from "@/Components/ProductDetails/page";
+import { notFound } from "next/navigation";
 
 const CategoryDetailsPage = async ({ params }: CategoryRouteProps) => {
     
@@ -16,10 +15,13 @@ const CategoryDetailsPage = async ({ params }: CategoryRouteProps) => {
 });
 
     const p: CategoryDetails[] = await res.json();
-    const categories: CategoryDetails[] = await res2.json();
+    const categories: Category[] = await res2.json();
 
 
-    const category: Category= categories.find((cat) => cat.id === id);
+    const category = categories.find((cat) => String(cat.id) === id);
+    if (!category) {
+        notFound();
+    }
 
     return (
         <>

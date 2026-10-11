@@ -1,7 +1,10 @@
 import Image from "next/image";
 import heroImg from "@/app/assets/bazar-hero.png"
 import Link from "next/link";
-const HeroSec = () => {
+import { connection } from "next/server";
+
+const HeroSec = async () => {
+    await connection();
     
  const today = new Date();
 

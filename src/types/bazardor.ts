@@ -11,6 +11,17 @@ export interface Product {
   unit: string;
   today: number;
   change: ProductChange;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  markets: MarketPrice[];
+}
+
+export interface MarketPrice {
+  market: string;
+  division: string;
+  min: number;
+  max: number;
 }
 
 export interface Category {
@@ -35,12 +46,4 @@ export interface CategoryRouteProps {
   params: Promise<{ id: string }>;
 }
 
-export interface CategoryDetails {
-  name: string;
-  id:string | number;
-  image: string;
-  nameBn: string;
-  unit: string;
-  today: number;
-  change: ProductChange;
-}
+export type CategoryDetails = Product;

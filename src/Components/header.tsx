@@ -3,7 +3,7 @@ import Link from "next/link";
 import logo from "@/app/assets/logo-icon.png"
 import Marquee from "./marquee";
 import { connection } from "next/server";
-import Categories from "@/app/Categories/page";
+import CategoryItem from "@/Components/CategoryItem";
 import type { Category } from "@/types/bazardor";
 import UserInfo from "./userInfo";
 
@@ -68,7 +68,7 @@ console.log(bengaliDate);
 <div className="bg-base-100 flex gap-6 my-2">
     {
         data.map((category) => (
-          <Categories key={category.id} category={category} />
+          <CategoryItem key={category.id} category={category} />
         ))
     }
 </div>

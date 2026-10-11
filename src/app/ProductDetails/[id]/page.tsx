@@ -1,5 +1,5 @@
-import { Product } from "@/lib/bazardor-api";
-import { CategoryRouteProps } from "@/types/bazardor";
+import type { CategoryRouteProps, Product } from "@/types/bazardor";
+import { notFound } from "next/navigation";
 
 
 
@@ -15,9 +15,12 @@ const ProductDetail = async ({params}:  CategoryRouteProps ) => {
     }
 
 
-    const alldata = await res.json();
+    const alldata: Product[] = await res.json();
 
-    const data= alldata.find((product: Product) => String(product.id) === id);
+    const data = alldata.find((product) => String(product.id) === id);
+    if (!data) {
+        notFound();
+    }
 
   let changeDir = "";
     if(data.change.pct>0){
@@ -33,10 +36,10 @@ const ProductDetail = async ({params}:  CategoryRouteProps ) => {
 const formatPrice = (price: number) =>
   `${price.toLocaleString("bn-BD")} টাকা`;
 
-    let prices=[data.today,data.yesterday,data.lastWeek,data.lastMonth];
-    let maxPrice=Math.max(...prices);
-    let minPrice=Math.min(...prices);
-    let avgPrice=prices.reduce((a,b)=>a+b,0)/prices.length;
+    const prices=[data.today,data.yesterday,data.lastWeek,data.lastMonth];
+    const maxPrice=Math.max(...prices);
+    const minPrice=Math.min(...prices);
+    const avgPrice=prices.reduce((a,b)=>a+b,0)/prices.length;
     
     return (
         <>
